@@ -10,7 +10,8 @@
 
 using namespace std;
 /**
-* @class TDA Translator. Cada instancia de este TDA es 
+* @class Translator
+* @brief TDA Translator. Cada instancia de Translator es 
 * un diccionario traductor que contiene todas las palabras de un 
 * idioma junto con sus traducciones en el idioma al que se quiere
 * traducir.
@@ -24,6 +25,11 @@ public:
 
 // ---------------------- Iteradores ----------------------
 
+    /** 
+    * @class Translator::iterator 
+    * @brief Iterador para iterar sobre
+    * las entradas que tiene el traductor.
+    */
     class iterator {
 
     private:
@@ -31,13 +37,17 @@ public:
         multimap <string, string>::iterator it;
 
     public:
-
+    /**
+    * @brief Sobrecarga del operador ++ prefijo.
+    */
         iterator& operator++(){
             ++(this->it);
 
             return *this;
         }
-
+    /**
+    * @brief Sobrecarga del operador ++ postfijo.
+    */
         iterator operator++(int){
             
             iterator tmp = *this;
@@ -46,13 +56,17 @@ public:
 
             return tmp;
         }
-
+    /**
+    * @brief Sobrecarga del operador -- prefijo.
+    */
         iterator& operator--(){
             --(this->it);
 
             return *this;
         }
-
+    /**
+    * @brief Sobrecarga del operador -- postfijo.
+    */
         iterator operator--(int){
             
             iterator tmp = *this;
@@ -61,18 +75,24 @@ public:
 
             return tmp;
         }
-
+    /**
+    * @brief Sobrecarga del operador de referencia.
+    */
         const pair <string, string> operator*() const {
             
             return *(this->it);
         }
-
+    /**
+    * @brief Sobrecarga del operador de igualdad.
+    */
         bool operator==(const iterator &it) const {
 
             return this->it == it.it;
 
         }
-
+    /**
+    * @brief Sobrecarga del operador !=.
+    */
         bool operator!=(const iterator &it) const {
 
             return this->it != it.it;
@@ -83,27 +103,39 @@ public:
         friend class const_iterator;
 
     };
-
+    
+    /** 
+    * @class Translator::const_iterator 
+    * @brief Iterador para iterar sobrelas entradas 
+    * que tiene el traductor de forma constante.
+    */
     class const_iterator {
 
     private:
 
-            multimap <string, string>::const_iterator it;
+        multimap <string, string>::const_iterator it;
 
     public:
-
+    /**
+    * @brief Sobrecarga del constructor de copia.
+    */
         const_iterator(const iterator &it){
 
             this->it = it.it;
 
         }
+    /**
+    * @brief Sobrecarga del operador ++ prefijo.
+    */
 
         const const_iterator& operator++(){
             ++(this->it);
 
             return *this;
         }
-
+    /**
+    * @brief Sobrecarga del operador ++ postfijo.
+    */
         const_iterator operator++(int){
             
             const_iterator tmp = *this;
@@ -112,13 +144,17 @@ public:
 
             return tmp;
         }
-
-        const const_iterator& operator--(){
+    /**
+    * @brief Sobrecarga del operador -- prefijo.
+    */
+        const_iterator& operator--(){
             --(this->it);
 
             return *this;
         }
-
+    /**
+    * @brief Sobrecarga del operador -- postfijo.
+    */
         const_iterator operator--(int){
             
             const_iterator tmp = *this;
@@ -127,17 +163,24 @@ public:
 
             return tmp;
         }
-
+    /**
+    * @brief Sobrecarga del operador de referencia.
+    */
         const pair <string, string> operator*() const {
+            
             return *(this->it);
         }
-
+    /**
+    * @brief Sobrecarga del operador de igualdad.
+    */
         bool operator==(const iterator &it) const {
 
             return this->it == it.it;
 
         }
-
+    /**
+    * @brief Sobrecarga del operador !=.
+    */
         bool operator!=(const iterator &it) const {
 
             return this->it != it.it;
@@ -147,8 +190,6 @@ public:
         friend class Translator;
 
     };
-
-
 
 /**
 * @brief Constructor por defecto de la clase Translator.
@@ -194,7 +235,7 @@ public:
 * @return Un traductor cuyo idioma origen es el idioma de destino
 * del primero, y el idioma destino es el idioma origen del primero.
 */
-   static Translator getInverse(Translator &src);
+    static Translator getInverse(Translator &src);
 /**
 * @brief Metodo que compone dos traductores. Dados dos traductores
 * como argumento, el primero que traduce del idioma A al B, y el

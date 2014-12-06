@@ -6,27 +6,26 @@
 
 using namespace std;
 /**
-* @class TDA Word. Cada instancia de este TDA es una 
+* @class Word. 
+* @brief TDA Word. Cada instancia de este TDA Word es una 
 * palabra en el idioma origen, que lleva además asociada sus 
 * traducciones en el idioma al que se quiere traducir.
 **/
 class Word{
 
 private:
-/**
-* @brief String que representa la palabra en el idioma
-* original.
-*/
+
     string word;
-/**
-* @brief Vector que contiene las distintas traducciones
-* que tiene la palabra.
-*/
+
     set <string> translations;
 
 public:
 // ------------- Iterador sobre las traducciones ------------
-
+    /** 
+    * @class Word::iterator 
+    * @brief Iterador para iterar sobre
+    * las entradas que tiene el traductor.
+    */
     class iterator {
 
     private:
@@ -34,13 +33,17 @@ public:
         set <string>::iterator it;
 
     public:
-
+/**
+    * @brief Sobrecarga del operador ++ prefijo.
+    */
         iterator& operator++(){
             ++(this->it);
 
             return *this;
         }
-
+    /**
+    * @brief Sobrecarga del operador ++ postfijo.
+    */
         iterator operator++(int){
             
             iterator tmp = *this;
@@ -49,13 +52,17 @@ public:
 
             return tmp;
         }
-
+    /**
+    * @brief Sobrecarga del operador -- prefijo.
+    */
         iterator& operator--(){
             --(this->it);
 
             return *this;
         }
-
+    /**
+    * @brief Sobrecarga del operador -- postfijo.
+    */
         iterator operator--(int){
             
             iterator tmp = *this;
@@ -64,17 +71,24 @@ public:
 
             return tmp;
         }
-
-        const string& operator*() const {
+    /**
+    * @brief Sobrecarga del operador de referencia.
+    */
+        string operator*() const {
+            
             return *(this->it);
         }
-
+    /**
+    * @brief Sobrecarga del operador de igualdad.
+    */
         bool operator==(const iterator &it) const {
 
             return this->it == it.it;
 
         }
-
+    /**
+    * @brief Sobrecarga del operador !=.
+    */
         bool operator!=(const iterator &it) const {
 
             return this->it != it.it;
@@ -82,29 +96,41 @@ public:
         }
 
         friend class Word;
+        friend class const_iterator;
 
-};
-
-class const_iterator {
+    };
+    /** 
+    * @class Word::const_iterator 
+    * @brief Iterador para iterar sobrelas entradas 
+    * que tiene el traductor de forma constante.
+    */
+    class const_iterator {
 
     private:
 
         set <string>::const_iterator it;
 
     public:
-
+    /**
+    * @brief Sobrecarga del constructor de copia.
+    */
         const_iterator(const iterator &it){
 
             this->it = it.it;
 
         }
+    /**
+    * @brief Sobrecarga del operador ++ prefijo.
+    */
 
         const const_iterator& operator++(){
             ++(this->it);
 
             return *this;
         }
-
+    /**
+    * @brief Sobrecarga del operador ++ postfijo.
+    */
         const_iterator operator++(int){
             
             const_iterator tmp = *this;
@@ -113,13 +139,17 @@ class const_iterator {
 
             return tmp;
         }
-
-        const const_iterator& operator--(){
+    /**
+    * @brief Sobrecarga del operador -- prefijo.
+    */
+        const_iterator& operator--(){
             --(this->it);
 
             return *this;
         }
-
+    /**
+    * @brief Sobrecarga del operador -- postfijo.
+    */
         const_iterator operator--(int){
             
             const_iterator tmp = *this;
@@ -128,17 +158,24 @@ class const_iterator {
 
             return tmp;
         }
-
-        const string& operator*() const {
+    /**
+    * @brief Sobrecarga del operador de referencia.
+    */
+        const string operator*() const {
+            
             return *(this->it);
         }
-
+    /**
+    * @brief Sobrecarga del operador de igualdad.
+    */
         bool operator==(const iterator &it) const {
 
             return this->it == it.it;
 
         }
-
+    /**
+    * @brief Sobrecarga del operador !=.
+    */
         bool operator!=(const iterator &it) const {
 
             return this->it != it.it;
